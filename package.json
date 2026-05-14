@@ -1,0 +1,49 @@
+{
+  "name": "universal-code-quality-gate",
+  "version": "0.1.0",
+  "description": "Portable final code audit gate for AI coding agents, reviews, CI, and editor workflows.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salexcarvalho/universal-code-quality-gate.git"
+  },
+  "homepage": "https://github.com/salexcarvalho/universal-code-quality-gate#readme",
+  "bugs": {
+    "url": "https://github.com/salexcarvalho/universal-code-quality-gate/issues"
+  },
+  "bin": {
+    "universal-code-quality-gate": "./bin/code-quality-gate.js",
+    "code-quality-gate": "./bin/code-quality-gate.js"
+  },
+  "scripts": {
+    "gate:changed": "node ./bin/code-quality-gate.js --changed",
+    "gate:repo": "node ./bin/code-quality-gate.js --repo",
+    "pack:dry-run": "npm pack --dry-run"
+  },
+  "files": [
+    "AGENTS.md",
+    "SKILL.md",
+    "README.md",
+    "bin",
+    "references",
+    "scripts"
+  ],
+  "keywords": [
+    "quality-gate",
+    "code-review",
+    "coverage",
+    "security",
+    "lint",
+    "ai-agent",
+    "copilot",
+    "codex",
+    "claude-code"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "preferGlobal": true,
+  "publishConfig": {
+    "access": "public"
+  }
+}
