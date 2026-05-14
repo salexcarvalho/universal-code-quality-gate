@@ -1,0 +1,24 @@
+name: Code Quality Gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Make quality gate executable
+        run: chmod +x ./scripts/code-quality-gate.sh
+
+      - name: Run repository gate
+        run: ./scripts/code-quality-gate.sh --repo --advisory
+
+      - name: Run quality gate
+        run: ./scripts/code-quality-gate.sh --changed
