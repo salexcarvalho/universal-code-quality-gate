@@ -25,7 +25,7 @@ This skill is designed to work in four modes:
 1. **Agent Skill mode**: use this `SKILL.md` plus `scripts/code-quality-gate.sh` as a packaged skill.
 2. **Codex / repository instruction mode**: copy the included `AGENTS.md` into the target repository.
 3. **Claude Code hook mode**: register `scripts/code-quality-gate.sh` as a `PostToolUse` hook for write/edit tools.
-4. **Claude Code installer mode**: install the packaged skill automatically with `universal-code-quality-gate-claude --global` or `--local`.
+4. **Claude Code installer mode**: install the packaged skill automatically with `universal-code-quality-gate claude --global` or `--local`.
 5. **Editor / CI mode**: run the script manually, from task runners, or from GitHub Actions.
 
 For public distribution, prefer packaging the repository so it can be installed with Git submodule or Git subtree.
@@ -277,9 +277,9 @@ Register the script as a `PostToolUse` hook for write/edit tools.
 If the npm package is available, prefer the automatic installer:
 
 ```bash
-npx universal-code-quality-gate-claude --global
+npx universal-code-quality-gate claude --global
 # or
-npx universal-code-quality-gate-claude --local
+npx universal-code-quality-gate claude --local
 ```
 
 Example `settings.json` fragment:
