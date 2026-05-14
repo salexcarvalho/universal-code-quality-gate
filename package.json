@@ -13,11 +13,13 @@
   },
   "bin": {
     "universal-code-quality-gate": "./bin/code-quality-gate.js",
-    "code-quality-gate": "./bin/code-quality-gate.js"
+    "code-quality-gate": "./bin/code-quality-gate.js",
+    "universal-code-quality-gate-claude": "./bin/install-claude-code.js"
   },
   "scripts": {
     "gate:changed": "node ./bin/code-quality-gate.js --changed",
     "gate:repo": "node ./bin/code-quality-gate.js --repo",
+    "claude:install": "node ./bin/install-claude-code.js --local",
     "pack:dry-run": "npm pack --dry-run"
   },
   "files": [
