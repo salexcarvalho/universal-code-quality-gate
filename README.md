@@ -51,6 +51,8 @@ After publishing to npm:
 ```bash
 npx universal-code-quality-gate --changed
 npx universal-code-quality-gate --repo
+npx universal-code-quality-gate claude --global
+npx universal-code-quality-gate claude --local
 ```
 
 Before publishing to npm, you can still run it directly from the Git repository:
@@ -58,12 +60,14 @@ Before publishing to npm, you can still run it directly from the Git repository:
 ```bash
 npx github:salexcarvalho/universal-code-quality-gate --changed
 npx github:salexcarvalho/universal-code-quality-gate --repo
+npx github:salexcarvalho/universal-code-quality-gate claude --global
 ```
 
 Or with a Git URL:
 
 ```bash
 npx git+https://github.com/salexcarvalho/universal-code-quality-gate.git --changed
+npx git+https://github.com/salexcarvalho/universal-code-quality-gate.git claude --local
 ```
 
 This works because the repository exposes an npm `bin` entry through [package.json](package.json), pointing to [scripts/code-quality-gate.sh](scripts/code-quality-gate.sh).
@@ -93,13 +97,21 @@ After publishing to npm, you can bootstrap the Claude Code skill and hook automa
 Global Claude Code install:
 
 ```bash
-npx universal-code-quality-gate-claude --global
+npx universal-code-quality-gate claude --global
 ```
 
 Project-local Claude Code install:
 
 ```bash
-npx universal-code-quality-gate-claude --local
+npx universal-code-quality-gate claude --local
+```
+
+If the npm package is not published yet, use the GitHub source directly:
+
+```bash
+npx github:salexcarvalho/universal-code-quality-gate claude --global
+# or
+npx git+https://github.com/salexcarvalho/universal-code-quality-gate.git claude --local
 ```
 
 The installer:
@@ -112,9 +124,9 @@ The installer:
 Useful flags:
 
 ```bash
-npx universal-code-quality-gate-claude --local --dry-run
-npx universal-code-quality-gate-claude --global --force
-npx universal-code-quality-gate-claude --local --no-hooks
+npx universal-code-quality-gate claude --local --dry-run
+npx universal-code-quality-gate claude --global --force
+npx universal-code-quality-gate claude --local --no-hooks
 ```
 
 ### Option 0B: install per agent or per repository
@@ -329,9 +341,9 @@ npx universal-code-quality-gate --changed
 Recommended automatic install:
 
 ```bash
-npx universal-code-quality-gate-claude --global
+npx universal-code-quality-gate claude --global
 # or
-npx universal-code-quality-gate-claude --local
+npx universal-code-quality-gate claude --local
 ```
 
 This creates the Claude skill folder and registers the quality gate as a `PostToolUse` hook for write/edit operations.
