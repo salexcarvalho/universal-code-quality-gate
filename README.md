@@ -56,14 +56,14 @@ npx universal-code-quality-gate --repo
 Before publishing to npm, you can still run it directly from the Git repository:
 
 ```bash
-npx github:<owner>/<repo> --changed
-npx github:<owner>/<repo> --repo
+npx github:salexcarvalho/universal-code-quality-gate --changed
+npx github:salexcarvalho/universal-code-quality-gate --repo
 ```
 
 Or with a Git URL:
 
 ```bash
-npx git+https://github.com/<owner>/<repo>.git --changed
+npx git+https://github.com/salexcarvalho/universal-code-quality-gate.git --changed
 ```
 
 This works because the repository exposes an npm `bin` entry through [package.json](package.json), pointing to [scripts/code-quality-gate.sh](scripts/code-quality-gate.sh).
@@ -82,7 +82,7 @@ universal-code-quality-gate --repo
 You can also install globally from Git:
 
 ```bash
-npm install -g git+https://github.com/<owner>/<repo>.git
+npm install -g git+https://github.com/salexcarvalho/universal-code-quality-gate.git
 universal-code-quality-gate --changed
 ```
 
@@ -124,7 +124,7 @@ Claude Code global skill:
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone <repo-url> ~/.claude/skills/universal-code-quality-gate
+git clone https://github.com/salexcarvalho/universal-code-quality-gate.git ~/.claude/skills/universal-code-quality-gate
 chmod +x ~/.claude/skills/universal-code-quality-gate/scripts/code-quality-gate.sh
 ```
 
@@ -132,7 +132,7 @@ Claude Code project-local skill:
 
 ```bash
 mkdir -p .claude/skills
-git clone <repo-url> .claude/skills/universal-code-quality-gate
+git clone https://github.com/salexcarvalho/universal-code-quality-gate.git .claude/skills/universal-code-quality-gate
 chmod +x .claude/skills/universal-code-quality-gate/scripts/code-quality-gate.sh
 ```
 
@@ -147,7 +147,7 @@ npx universal-code-quality-gate --changed
 Shared internal agent folder:
 
 ```bash
-git clone <repo-url> ~/agent-skills/universal-code-quality-gate
+git clone https://github.com/salexcarvalho/universal-code-quality-gate.git ~/agent-skills/universal-code-quality-gate
 npm install -g ~/agent-skills/universal-code-quality-gate
 universal-code-quality-gate --repo
 ```
@@ -155,7 +155,7 @@ universal-code-quality-gate --repo
 ### Option 1: install as a Git submodule
 
 ```bash
-git submodule add <repo-url> tools/universal-code-quality-gate
+git submodule add https://github.com/salexcarvalho/universal-code-quality-gate.git tools/universal-code-quality-gate
 chmod +x tools/universal-code-quality-gate/scripts/code-quality-gate.sh
 ```
 
@@ -164,7 +164,7 @@ Recommended when you want to keep the skill versioned and updatable from the sou
 ### Option 2: install with git subtree
 
 ```bash
-git subtree add --prefix tools/universal-code-quality-gate <repo-url> main --squash
+git subtree add --prefix tools/universal-code-quality-gate https://github.com/salexcarvalho/universal-code-quality-gate.git main --squash
 chmod +x tools/universal-code-quality-gate/scripts/code-quality-gate.sh
 ```
 
@@ -187,7 +187,12 @@ cp universal-code-quality-gate-skill/scripts/code-quality-gate.sh scripts/
 chmod +x scripts/code-quality-gate.sh
 ```
 
-If you publish this repository, replace `<repo-url>` with the final public Git URL.
+Repository URL:
+
+```text
+https://github.com/salexcarvalho/universal-code-quality-gate
+```
+
 If you publish it to npm, the package name is already configured as `universal-code-quality-gate` in [package.json](package.json).
 
 ## Usage
@@ -342,8 +347,8 @@ Warnings such as code smell, maintainability concerns, or partially unavailable 
 ## Public release checklist
 
 - Validate the script on Linux/macOS and Git Bash/WSL.
-- Confirm the repository has a public Git URL and update install examples.
-- Add npm metadata such as repository, homepage, and bugs URL before publish.
+- Confirm the GitHub repository URL remains correct in the install examples.
+- Confirm npm metadata in [package.json](package.json) stays aligned with the GitHub repository.
 - Run `npm run pack:dry-run` before publishing.
 - Publish with `npm publish --access public`.
 - Keep private project names and internal paths out of the repository.
@@ -351,4 +356,3 @@ Warnings such as code smell, maintainability concerns, or partially unavailable 
 - Keep the default behavior non-destructive.
 - Ensure the workflow runs both changed-file and repository-level checks.
 - Verify `SKILL.md`, `AGENTS.md`, and the script stay behaviorally aligned.
-# universal-code-quality-gate
