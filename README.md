@@ -86,6 +86,37 @@ npm install -g git+https://github.com/salexcarvalho/universal-code-quality-gate.
 universal-code-quality-gate --changed
 ```
 
+### Option 0A.1: install as a Claude Code plugin
+
+After publishing to npm, you can bootstrap the Claude Code skill and hook automatically.
+
+Global Claude Code install:
+
+```bash
+npx universal-code-quality-gate-claude --global
+```
+
+Project-local Claude Code install:
+
+```bash
+npx universal-code-quality-gate-claude --local
+```
+
+The installer:
+
+- copies the packaged skill into the correct Claude directory;
+- ensures the gate scripts stay executable;
+- merges a `PostToolUse` hook into `settings.local.json` when it already exists, otherwise into `settings.json`;
+- creates a backup of the previous settings file before modifying it.
+
+Useful flags:
+
+```bash
+npx universal-code-quality-gate-claude --local --dry-run
+npx universal-code-quality-gate-claude --global --force
+npx universal-code-quality-gate-claude --local --no-hooks
+```
+
 ### Option 0B: install per agent or per repository
 
 If you want behavior similar to agent skill directories, keep the package local to one agent or one repository.
@@ -295,6 +326,16 @@ npx universal-code-quality-gate --changed
 
 ## Claude Code usage
 
+Recommended automatic install:
+
+```bash
+npx universal-code-quality-gate-claude --global
+# or
+npx universal-code-quality-gate-claude --local
+```
+
+This creates the Claude skill folder and registers the quality gate as a `PostToolUse` hook for write/edit operations.
+
 Copy `SKILL.md` and `scripts/` as a skill folder. To run after file edits, register the script as a `PostToolUse` hook.
 
 Recommended layouts:
@@ -323,6 +364,26 @@ Example hook fragment:
           {
             "type": "command",
             "command": "./scripts/code-quality-gate.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+For project-local installation, the automatic installer writes a relative command so the hook remains portable inside the repository:
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|str_replace_based_edit_tool",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./.claude/skills/universal-code-quality-gate/scripts/code-quality-gate.sh --advisory"
           }
         ]
       }
